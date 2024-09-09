@@ -112,7 +112,7 @@ const Home = () => {
               variant="primary"
               style={{ width: "100%" }}
               as={Link}
-              to={"https://3580-110-39-11-3.ngrok-free.app/auth/google"}
+              to={"http://localhost:5500/auth/google"}
             >
               Login with Google
             </Button>

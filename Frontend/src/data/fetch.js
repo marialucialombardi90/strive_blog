@@ -1,7 +1,7 @@
 import { successToast } from "../components/Toasts";
 
 export const loadPosts = async (search) => {
-  const urlBase = "https://3580-110-39-11-3.ngrok-free.app/blogPosts";
+  const urlBase = "http://localhost:5500/blogPosts";
   const urlSearch = search && `?title=${search}`;
   const res = await fetch(urlBase + urlSearch, {
     headers: {
@@ -13,7 +13,7 @@ export const loadPosts = async (search) => {
 };
 
 export const loadComments = async (id) => {
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}/comments`, {
+  const res = await fetch(`http://localhost:5500/blogPosts/${id}/comments`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -24,7 +24,7 @@ export const loadComments = async (id) => {
 
 export const deleteComment = async (id, commentId) => {
   const res = await fetch(
-    `https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}/comment/${commentId}`,
+    `http://localhost:5500/blogPosts/${id}/comment/${commentId}`,
     {
       method: "DELETE",
       headers: {
@@ -38,7 +38,7 @@ export const deleteComment = async (id, commentId) => {
 
 export const loadSinglePost = async (paramsId) => {
   console.log(paramsId);
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${paramsId}`, {
+  const res = await fetch(`http://localhost:5500/blogPosts/${paramsId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -55,7 +55,7 @@ export const newPost = async (formValue, cover) => {
   formData.append("readTime", JSON.stringify(formValue.readTime));
   formData.append("author", formValue.author);
   formData.append("content", formValue.content);
-  const res = await fetch("https://3580-110-39-11-3.ngrok-free.app/blogPosts", {
+  const res = await fetch("http://localhost:5500/blogPosts", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -75,7 +75,7 @@ export const updatePost = async (id, formValue, cover) => {
   formData.append("readTime", JSON.stringify(formValue.readTime));
   formData.append("author", formValue.author);
   formData.append("content", formValue.content);
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}`, {
+  const res = await fetch(`http://localhost:5500/blogPosts/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -87,7 +87,7 @@ export const updatePost = async (id, formValue, cover) => {
   if (cover) {
     const formData = new FormData();
     if (cover) formData.append("cover", cover);
-    const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}/cover`, {
+    const res = await fetch(`http://localhost:5500/blogPosts/${id}/cover`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -102,7 +102,7 @@ export const updatePost = async (id, formValue, cover) => {
 };
 
 export const getPost = async (id) => {
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}`, {
+  const res = await fetch(`http://localhost:5500/blogPosts/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -115,7 +115,7 @@ export const getPost = async (id) => {
 
 export const login = async (formValue) => {
   try {
-    const res = await fetch("https://3580-110-39-11-3.ngrok-free.app/auth/login", {
+    const res = await fetch("http://localhost:5500/auth/login", {
       headers: {
         "Content-Type": "application/json",
       },
@@ -135,7 +135,7 @@ export const login = async (formValue) => {
 };
 
 export const me = async () => {
-  const res = await fetch("https://3580-110-39-11-3.ngrok-free.app/auth/me", {
+  const res = await fetch("http://localhost:5500/auth/me", {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -157,7 +157,7 @@ export const register = async (regFormValue, avatar) => {
   formData.append("password", regFormValue.password);
 
   try {
-    const res = await fetch("https://3580-110-39-11-3.ngrok-free.app/auth/register", {
+    const res = await fetch("http://localhost:5500/auth/register", {
       method: "POST",
       body: formData,
     });
@@ -171,7 +171,7 @@ export const register = async (regFormValue, avatar) => {
 };
 
 export const newComment = async (id, formValue) => {
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}/comments`, {
+  const res = await fetch(`http://localhost:5500/blogPosts/${id}/comments`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -185,7 +185,7 @@ export const newComment = async (id, formValue) => {
 
 export const updateComment = async (id, formValue, commentId) => {
   const res = await fetch(
-    `https://3580-110-39-11-3.ngrok-free.app/blogPosts/${id}/comment/${commentId}`,
+    `http://localhost:5500/blogPosts/${id}/comment/${commentId}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -201,7 +201,7 @@ export const updateComment = async (id, formValue, commentId) => {
 
 export const deletePost = async (postId) => {
   try {
-    const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/blogPosts/${postId}`, {
+    const res = await fetch(`http://localhost:5500/blogPosts/${postId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -222,7 +222,7 @@ export const deletePost = async (postId) => {
 export const updateUserAvatar = async (authorId, avatar) => {
   const formData = new FormData();
   formData.append("avatar", avatar);
-  const res = await fetch(`https://3580-110-39-11-3.ngrok-free.app/authors/${authorId}/avatar`, {
+  const res = await fetch(`http://localhost:5500/authors/${authorId}/avatar`, {
     method: "PATCH",
     body: formData,
     headers: {
