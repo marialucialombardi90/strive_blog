@@ -1,0 +1,7 @@
+body {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.body-main {
+  min-height: calc(100vh - 110px);
+}
