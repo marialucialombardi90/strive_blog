@@ -1,7 +1,8 @@
 import { successToast } from "../components/Toasts";
+import { serverConfig } from "../utils";
 
 export const loadPosts = async (search) => {
-  const urlBase = "http://localhost:5500/blogPosts";
+  const urlBase = `${serverConfig.base_url}/blogPosts`;
   const urlSearch = search && `?title=${search}`;
   const res = await fetch(urlBase + urlSearch, {
     headers: {
@@ -13,7 +14,7 @@ export const loadPosts = async (search) => {
 };
 
 export const loadComments = async (id) => {
-  const res = await fetch(`http://localhost:5500/blogPosts/${id}/comments`, {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts/${id}/comments`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -24,7 +25,7 @@ export const loadComments = async (id) => {
 
 export const deleteComment = async (id, commentId) => {
   const res = await fetch(
-    `http://localhost:5500/blogPosts/${id}/comment/${commentId}`,
+    `${serverConfig.base_url}/blogPosts/${id}/comment/${commentId}`,
     {
       method: "DELETE",
       headers: {
@@ -38,7 +39,7 @@ export const deleteComment = async (id, commentId) => {
 
 export const loadSinglePost = async (paramsId) => {
   console.log(paramsId);
-  const res = await fetch(`http://localhost:5500/blogPosts/${paramsId}`, {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts/${paramsId}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -55,7 +56,7 @@ export const newPost = async (formValue, cover) => {
   formData.append("readTime", JSON.stringify(formValue.readTime));
   formData.append("author", formValue.author);
   formData.append("content", formValue.content);
-  const res = await fetch("http://localhost:5500/blogPosts", {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -75,7 +76,7 @@ export const updatePost = async (id, formValue, cover) => {
   formData.append("readTime", JSON.stringify(formValue.readTime));
   formData.append("author", formValue.author);
   formData.append("content", formValue.content);
-  const res = await fetch(`http://localhost:5500/blogPosts/${id}`, {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -87,7 +88,7 @@ export const updatePost = async (id, formValue, cover) => {
   if (cover) {
     const formData = new FormData();
     if (cover) formData.append("cover", cover);
-    const res = await fetch(`http://localhost:5500/blogPosts/${id}/cover`, {
+    const res = await fetch(`${serverConfig.base_url}/blogPosts/${id}/cover`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
@@ -102,7 +103,7 @@ export const updatePost = async (id, formValue, cover) => {
 };
 
 export const getPost = async (id) => {
-  const res = await fetch(`http://localhost:5500/blogPosts/${id}`, {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts/${id}`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -115,7 +116,7 @@ export const getPost = async (id) => {
 
 export const login = async (formValue) => {
   try {
-    const res = await fetch("http://localhost:5500/auth/login", {
+    const res = await fetch(`${serverConfig.base_url}/auth/login`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -135,7 +136,7 @@ export const login = async (formValue) => {
 };
 
 export const me = async () => {
-  const res = await fetch("http://localhost:5500/auth/me", {
+  const res = await fetch(`${serverConfig.base_url}/auth/me`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
@@ -157,7 +158,7 @@ export const register = async (regFormValue, avatar) => {
   formData.append("password", regFormValue.password);
 
   try {
-    const res = await fetch("http://localhost:5500/auth/register", {
+    const res = await fetch(`${serverConfig.base_url}/auth/register`, {
       method: "POST",
       body: formData,
     });
@@ -171,7 +172,7 @@ export const register = async (regFormValue, avatar) => {
 };
 
 export const newComment = async (id, formValue) => {
-  const res = await fetch(`http://localhost:5500/blogPosts/${id}/comments`, {
+  const res = await fetch(`${serverConfig.base_url}/blogPosts/${id}/comments`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
       "Content-Type": "application/json",
@@ -185,7 +186,7 @@ export const newComment = async (id, formValue) => {
 
 export const updateComment = async (id, formValue, commentId) => {
   const res = await fetch(
-    `http://localhost:5500/blogPosts/${id}/comment/${commentId}`,
+    `${serverConfig.base_url}/blogPosts/${id}/comment/${commentId}`,
     {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -201,7 +202,7 @@ export const updateComment = async (id, formValue, commentId) => {
 
 export const deletePost = async (postId) => {
   try {
-    const res = await fetch(`http://localhost:5500/blogPosts/${postId}`, {
+    const res = await fetch(`${serverConfig.base_url}/blogPosts/${postId}`, {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
         "Content-Type": "application/json",
@@ -222,13 +223,16 @@ export const deletePost = async (postId) => {
 export const updateUserAvatar = async (authorId, avatar) => {
   const formData = new FormData();
   formData.append("avatar", avatar);
-  const res = await fetch(`http://localhost:5500/authors/${authorId}/avatar`, {
-    method: "PATCH",
-    body: formData,
-    headers: {
-      Authorization: `Bearer ${localStorage.getItem("token")}`,
-    },
-  });
+  const res = await fetch(
+    `${serverConfig.base_url}/authors/${authorId}/avatar`,
+    {
+      method: "PATCH",
+      body: formData,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    }
+  );
   const data = await res.json();
   return data;
 };

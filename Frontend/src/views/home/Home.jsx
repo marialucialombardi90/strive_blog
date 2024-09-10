@@ -9,6 +9,7 @@ import Form from "react-bootstrap/Form";
 import { login } from "../../data/fetch";
 import { Link, useSearchParams } from "react-router-dom";
 import { errorToast, successToast } from "../../components/Toasts";
+import { serverConfig } from "../../utils";
 
 const Home = () => {
   let [searchParams] = useSearchParams();
@@ -112,7 +113,7 @@ const Home = () => {
               variant="primary"
               style={{ width: "100%" }}
               as={Link}
-              to={"http://localhost:5500/auth/google"}
+              to={`${serverConfig.base_url}/auth/google`}
             >
               Login with Google
             </Button>
@@ -124,3 +125,4 @@ const Home = () => {
 };
 
 export default Home;
+
