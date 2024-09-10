@@ -194,43 +194,46 @@ const NavBar = () => {
         </Modal>
 
         {authorInfo && token ? (
-          <Navbar.Collapse id="responsive-navbar-nav">
+          <>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
 
-            <Nav className="me-auto">
-              <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
-                Authors
-              </Nav.Link>
-              <Nav.Link
-                onClick={() => {
-                  navigate("/profile");
-                }}
+              <Nav className="me-auto">
+                <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
+                  Authors
+                </Nav.Link>
+                <Nav.Link
+                  onClick={() => {
+                    navigate("/profile");
+                  }}
+                >
+                  Profile
+                </Nav.Link>
+                <Nav.Link onClick={handleLogout}>
+                  Logout
+                </Nav.Link>
+                <Button
+                  as={Link}
+                  to="/new"
+                  className="blog-navbar-add-button"
+                  variant="outline-dark"
+                >
+                  <FiPlus size={25} />
+                  New Blog
+                </Button>
+              </Nav>
+              <NavDropdown
+                title={
+                  <Image
+                    src={authorInfo.avatar}
+                    className="authorAvatar me-2"
+                  />
+                }
               >
-                Profile
-              </Nav.Link>
-              <Nav.Link onClick={handleLogout}>
-                Logout
-              </Nav.Link>
-              <Button
-                as={Link}
-                to="/new"
-                className="blog-navbar-add-button"
-                variant="outline-dark"
-              >
-                <FiPlus size={25} />
-                New Blog
-              </Button>
-            </Nav>
-            <NavDropdown
-              title={
-                <Image
-                  src={authorInfo.avatar}
-                  className="authorAvatar me-2"
-                />
-              }
-            >
 
-            </NavDropdown>
-          </Navbar.Collapse>
+              </NavDropdown>
+            </Navbar.Collapse>
+          </>
         ) : (
           <Button
             className="ms-3"
