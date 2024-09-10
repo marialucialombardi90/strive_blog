@@ -74,15 +74,11 @@ const NavBar = () => {
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
-        <Nav className="me-auto">
-          <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
-            Authors
-          </Nav.Link>
-        </Nav>
+
         <Modal
           size="lg"
           show={showReg}
-          onHide={!loading ? handleCloseReg : () => {}}
+          onHide={!loading ? handleCloseReg : () => { }}
           centered
         >
           <Modal.Header closeButton>
@@ -196,9 +192,15 @@ const NavBar = () => {
             </Button>
           </Modal.Footer>
         </Modal>
-        <div className="d-flex">
-          {authorInfo && token ? (
-            <>
+
+        {authorInfo && token ? (
+          <>
+            <Nav className="me-auto">
+              <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
+                Authors
+              </Nav.Link>
+            </Nav>
+            <div className="d-flex">
               <Button
                 as={Link}
                 to="/new"
@@ -228,17 +230,17 @@ const NavBar = () => {
                   Logout
                 </NavDropdown.Item>
               </NavDropdown>
-            </>
-          ) : (
-            <Button
-              className="ms-3"
-              variant="secondary"
-              onClick={handleShowReg}
-            >
-              Register
-            </Button>
-          )}
-        </div>
+            </div>
+          </>
+        ) : (
+          <Button
+            className="ms-3"
+            variant="secondary"
+            onClick={handleShowReg}
+          >
+            Register
+          </Button>
+        )}
       </Container>
     </Navbar>
   );
