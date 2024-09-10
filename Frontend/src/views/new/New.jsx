@@ -20,7 +20,7 @@ const NewBlogPost = () => {
   console.log(id);
 
   const initialFormValue = {
-    category: "",
+    category: "Science",
     title: "",
     cover: "",
     readTime: {
@@ -90,7 +90,7 @@ const NewBlogPost = () => {
           />
         </Form.Group>
         <Form.Group controlId="blog-category" className="mt-3">
-          <Form.Label>Categoria</Form.Label>
+          <Form.Label>Category</Form.Label>
           <Form.Control
             size="lg"
             as="select"
@@ -98,11 +98,11 @@ const NewBlogPost = () => {
             value={formValue?.category}
             onChange={(event) => handleChangeFormValue(event)}
           >
-            <option value="Categoria 1">Category 1</option>
-            <option value="Category 2">Category 2</option>
-            <option value="Category 3">Category 3</option>
-            <option value="Category 4">Category 4</option>
-            <option value="Category 5">Category 5</option>
+            <option value="Science">Science</option>
+            <option value="Action">Action</option>
+            <option value="Sci-Fi">Sci-Fi</option>
+            <option value="General">General</option>
+            <option value="Fiction">Fiction</option>
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="cover" className="mt-3 mb-3">
