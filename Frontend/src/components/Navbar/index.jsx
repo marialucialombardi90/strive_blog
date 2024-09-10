@@ -212,26 +212,20 @@ const NavBar = () => {
                 <Nav.Link onClick={handleLogout}>
                   Logout
                 </Nav.Link>
-                <Button
-                  as={Link}
-                  to="/new"
-                  className="blog-navbar-add-button"
-                  variant="outline-dark"
-                >
-                  <FiPlus size={25} />
-                  New Blog
-                </Button>
-              </Nav>
-              <NavDropdown
-                title={
-                  <Image
-                    src={authorInfo.avatar}
-                    className="authorAvatar me-2"
-                  />
-                }
-              >
+                <Nav.Link>
 
-              </NavDropdown>
+                  <Button
+                    as={Link}
+                    to="/new"
+                    className="blog-navbar-add-button"
+                    variant="outline-dark"
+                  >
+                    <FiPlus size={25} />
+                    New Blog
+                  </Button>
+                </Nav.Link>
+
+              </Nav>
             </Navbar.Collapse>
           </>
         ) : (
