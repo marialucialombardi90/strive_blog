@@ -194,13 +194,22 @@ const NavBar = () => {
         </Modal>
 
         {authorInfo && token ? (
-          <>
+          <Navbar.Collapse id="responsive-navbar-nav">
+
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
                 Authors
               </Nav.Link>
-            </Nav>
-            <div className="d-flex">
+              <Nav.Link
+                onClick={() => {
+                  navigate("/profile");
+                }}
+              >
+                Profile
+              </Nav.Link>
+              <Nav.Link onClick={handleLogout}>
+                Logout
+              </Nav.Link>
               <Button
                 as={Link}
                 to="/new"
@@ -210,28 +219,18 @@ const NavBar = () => {
                 <FiPlus size={25} />
                 New Blog
               </Button>
-              <NavDropdown
-                title={
-                  <Image
-                    src={authorInfo.avatar}
-                    className="authorAvatar me-2"
-                  />
-                }
-              >
-                <NavDropdown.Item
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
-                >
-                  Profile
-                </NavDropdown.Item>
-                <NavDropdown.Divider />
-                <NavDropdown.Item onClick={handleLogout}>
-                  Logout
-                </NavDropdown.Item>
-              </NavDropdown>
-            </div>
-          </>
+            </Nav>
+            <NavDropdown
+              title={
+                <Image
+                  src={authorInfo.avatar}
+                  className="authorAvatar me-2"
+                />
+              }
+            >
+
+            </NavDropdown>
+          </Navbar.Collapse>
         ) : (
           <Button
             className="ms-3"

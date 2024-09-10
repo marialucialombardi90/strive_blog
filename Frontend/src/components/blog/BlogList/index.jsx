@@ -23,7 +23,7 @@ const BlogList = () => {
           <Form.Control
             type="search"
             placeholder="Search post"
-            className="me-2 mb-2 w-25"
+            className="me-2 mb-2 w-100"
             aria-label="Search"
             name="search"
             onChange={handleSearch}
