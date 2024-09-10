@@ -238,7 +238,7 @@ export const updateUserAvatar = async (authorId, avatar) => {
 };
 
 export const getAuthers = async (page) => {
-  const res = await fetch(`http://localhost:5500/authors?page=1`, {
+  const res = await fetch(`${serverConfig.base_url}/authors?page=1`, {
     method: "get",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -249,7 +249,7 @@ export const getAuthers = async (page) => {
 };
 
 export const getAutherPosts = async (id) => {
-  const res = await fetch(`http://localhost:5500/authors/${id}/blogPosts`, {
+  const res = await fetch(`${serverConfig.base_url}/authors/${id}/blogPosts`, {
     method: "get",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
