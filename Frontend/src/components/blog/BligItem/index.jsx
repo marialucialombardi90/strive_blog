@@ -17,6 +17,7 @@ const BlogItem = (props) => {
     setAggiornaBlogList,
     aggiornaBlogList,
     content,
+    isSubBlog,
   } = props;
   const navigate = useNavigate();
   const handleDelete = async () => {
@@ -36,9 +37,13 @@ const BlogItem = (props) => {
         <Card.Img variant="top" src={cover} className="blog-cover" />
         <Card.Body>
           <Card.Title className="blog-title">{title}</Card.Title>
-          <hr />
-          <BlogAuthor {...author} />
-          <hr />
+          {!isSubBlog ? (
+            <>
+              <hr />
+              <BlogAuthor {...author} />
+              <hr />
+            </>
+          ) : null}
           <Card.Text
             className="blog-desc"
             dangerouslySetInnerHTML={{ __html: content }}
@@ -49,7 +54,7 @@ const BlogItem = (props) => {
         <Button variant="dark" as={Link} to={`/blog/${_id}`}>
           Read
         </Button>
-        {authorInfo._id === author._id ? (
+        {!isSubBlog && authorInfo._id === author._id ? (
           <>
             <Button
               variant="primary"

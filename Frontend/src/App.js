@@ -15,6 +15,8 @@ import AuthContextProvider from "./context/AuthContextProvider";
 import NotFound from "./pages/NotFound";
 import { Toaster } from "react-hot-toast";
 import ProfilePage from "./views/profile/ProfilePage";
+import Authors from "./views/Authors";
+import AuthorBlogs from "./views/AuthorBlogs";
 
 function App() {
   useEffect(() => {
@@ -29,8 +31,10 @@ function App() {
           <Routes>
             <Route path="/" exact element={<Home />} />
             <Route path="/blog/:id" element={<Blog />} />
-            <Route path="/edit/blog/:id" element={<NewBlogPost />} />/
+            <Route path="/edit/blog/:id" element={<NewBlogPost />} />
             <Route path="/new" element={<NewBlogPost />} />
+            <Route path="/authors" element={<Authors />} />
+            <Route path="/author/:id/blogs" element={<AuthorBlogs />} />
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/404" element={<NotFound />} />
             <Route path="/*" element={<Navigate to="/404" />} />

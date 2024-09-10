@@ -8,6 +8,7 @@ import {
   Image,
   NavDropdown,
   Spinner,
+  Nav,
 } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -73,6 +74,11 @@ const NavBar = () => {
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
+        <Nav className="me-auto">
+          <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
+            Authors
+          </Nav.Link>
+        </Nav>
         <Modal
           size="lg"
           show={showReg}
@@ -200,7 +206,7 @@ const NavBar = () => {
                 variant="outline-dark"
               >
                 <FiPlus size={25} />
-                Nuovo Articolo
+                New Blog
               </Button>
               <NavDropdown
                 title={

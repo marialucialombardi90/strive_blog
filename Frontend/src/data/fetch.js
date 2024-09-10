@@ -236,3 +236,25 @@ export const updateUserAvatar = async (authorId, avatar) => {
   const data = await res.json();
   return data;
 };
+
+export const getAuthers = async (page) => {
+  const res = await fetch(`http://localhost:5500/authors?page=1`, {
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const data = await res.json();
+  return data;
+};
+
+export const getAutherPosts = async (id) => {
+  const res = await fetch(`http://localhost:5500/authors/${id}/blogPosts`, {
+    method: "get",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+  const data = await res.json();
+  return data;
+};
