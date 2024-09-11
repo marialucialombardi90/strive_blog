@@ -76,7 +76,7 @@ const NavBar = () => {
 
 
   return (
-    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expand="lg" className="blog-navbar navbar-expand-lg" fixed="top">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
@@ -205,9 +205,8 @@ const NavBar = () => {
 
         {authorInfo && token ? (
           <>
-            <Navbar.Toggle aria-controls="navbarSupportedContent" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" />
+            <Navbar.Toggle data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" />
             <Navbar.Collapse id="navbarSupportedContent">
-
 
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
