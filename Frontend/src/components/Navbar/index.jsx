@@ -205,8 +205,8 @@ const NavBar = () => {
 
         {authorInfo && token ? (
           <>
-             <Navbar.Toggle aria-controls="navbarSupportedContent" />
-             <Navbar.Collapse id="navbarSupportedContent">
+            <Navbar.Toggle aria-controls="navbarSupportedContent" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" />
+            <Navbar.Collapse id="navbarSupportedContent">
 
 
               <Nav className="me-auto">
