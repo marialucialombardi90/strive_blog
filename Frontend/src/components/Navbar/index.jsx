@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React from "react";
 import {
   Button,
   Container,
@@ -14,18 +14,21 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles.css";
 import { AuthContext } from "../../context/AuthContextProvider";
+import { useContext, useState } from "react";
 import { register } from "../../data/fetch";
 import { FiPlus } from "react-icons/fi";
+
 
 const NavBar = () => {
   const { token, setToken, authorInfo, setAuthorInfo } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  const [expanded, setExpanded] = useState(false); // State to handle the navbar toggle
+  console.log(authorInfo);
   const [showReg, setShowReg] = useState(false);
   const handleCloseReg = () => setShowReg(false);
   const handleShowReg = () => setShowReg(true);
   const [loading, setLoading] = useState(false);
+
 
   const initialRegistrationFormValue = {
     first_name: "",
@@ -40,6 +43,7 @@ const NavBar = () => {
   );
   const [avatar, setAvatar] = useState("");
 
+
   const handleChangeRegistration = (event) => {
     setRegFormValue({
       ...regFormValue,
@@ -47,9 +51,11 @@ const NavBar = () => {
     });
   };
 
+
   const handleChangeImage = (event) => {
     setAvatar(event.target.files[0]);
   };
+
 
   const handleRegister = async () => {
     setLoading(true);
@@ -60,6 +66,7 @@ const NavBar = () => {
     setLoading(false);
   };
 
+
   const handleLogout = () => {
     setToken(null);
     setAuthorInfo(null);
@@ -67,20 +74,14 @@ const NavBar = () => {
     navigate("/");
   };
 
-  // Close navbar collapse when route changes
-  useEffect(() => {
-    const unlisten = navigate(() => {
-      setExpanded(false); // Close the navbar
-    });
-    return () => unlisten(); // Cleanup the listener
-  }, [navigate]);
 
   return (
-    <Navbar expanded={expanded} expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expand="lg" className="blog-navbar" fixed="top">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
+
 
         <Modal
           size="lg"
@@ -181,6 +182,7 @@ const NavBar = () => {
               Close
             </Button>
 
+
             <Button
               variant="primary"
               onClick={handleRegister}
@@ -200,13 +202,12 @@ const NavBar = () => {
           </Modal.Footer>
         </Modal>
 
+
         {authorInfo && token ? (
           <>
-            <Navbar.Toggle
-              aria-controls="responsive-navbar-nav"
-              onClick={() => setExpanded(expanded ? false : "expanded")}
-            />
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
+
 
               <Nav className="me-auto">
                 <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
@@ -224,6 +225,7 @@ const NavBar = () => {
                 </Nav.Link>
                 <Nav.Link>
 
+
                   <Button
                     as={Link}
                     to="/new"
@@ -234,6 +236,7 @@ const NavBar = () => {
                     New Blog
                   </Button>
                 </Nav.Link>
+
 
               </Nav>
             </Navbar.Collapse>
@@ -252,4 +255,8 @@ const NavBar = () => {
   );
 };
 
+
 export default NavBar;
+
+
+
