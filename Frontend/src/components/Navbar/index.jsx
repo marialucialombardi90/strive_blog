@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   Button,
   Container,
@@ -14,7 +14,6 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import "./styles.css";
 import { AuthContext } from "../../context/AuthContextProvider";
-import { useContext, useState } from "react";
 import { register } from "../../data/fetch";
 import { FiPlus } from "react-icons/fi";
 
@@ -22,7 +21,7 @@ const NavBar = () => {
   const { token, setToken, authorInfo, setAuthorInfo } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(authorInfo);
+  const [expanded, setExpanded] = useState(false); // State to handle the navbar toggle
   const [showReg, setShowReg] = useState(false);
   const handleCloseReg = () => setShowReg(false);
   const handleShowReg = () => setShowReg(true);
@@ -68,8 +67,16 @@ const NavBar = () => {
     navigate("/");
   };
 
+  // Close navbar collapse when route changes
+  useEffect(() => {
+    const unlisten = navigate(() => {
+      setExpanded(false); // Close the navbar
+    });
+    return () => unlisten(); // Cleanup the listener
+  }, [navigate]);
+
   return (
-    <Navbar expand="lg" className="blog-navbar" fixed="top">
+    <Navbar expanded={expanded} expand="lg" className="blog-navbar" fixed="top">
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
@@ -195,7 +202,10 @@ const NavBar = () => {
 
         {authorInfo && token ? (
           <>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Toggle
+              aria-controls="responsive-navbar-nav"
+              onClick={() => setExpanded(expanded ? false : "expanded")}
+            />
             <Navbar.Collapse id="responsive-navbar-nav">
 
               <Nav className="me-auto">
