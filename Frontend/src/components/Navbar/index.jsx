@@ -5,8 +5,6 @@ import {
   Navbar,
   Modal,
   Form,
-  Image,
-  NavDropdown,
   Spinner,
   Nav,
 } from "react-bootstrap";
@@ -18,17 +16,15 @@ import { useContext, useState } from "react";
 import { register } from "../../data/fetch";
 import { FiPlus } from "react-icons/fi";
 
-
 const NavBar = () => {
   const { token, setToken, authorInfo, setAuthorInfo } =
     useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(authorInfo);
   const [showReg, setShowReg] = useState(false);
   const handleCloseReg = () => setShowReg(false);
   const handleShowReg = () => setShowReg(true);
   const [loading, setLoading] = useState(false);
-
+  const [expanded, setExpanded] = useState(false);
 
   const initialRegistrationFormValue = {
     first_name: "",
@@ -38,11 +34,8 @@ const NavBar = () => {
     email: "",
     date_of_birth: "",
   };
-  const [regFormValue, setRegFormValue] = useState(
-    initialRegistrationFormValue
-  );
+  const [regFormValue, setRegFormValue] = useState(initialRegistrationFormValue);
   const [avatar, setAvatar] = useState("");
-
 
   const handleChangeRegistration = (event) => {
     setRegFormValue({
@@ -51,11 +44,9 @@ const NavBar = () => {
     });
   };
 
-
   const handleChangeImage = (event) => {
     setAvatar(event.target.files[0]);
   };
-
 
   const handleRegister = async () => {
     setLoading(true);
@@ -66,7 +57,6 @@ const NavBar = () => {
     setLoading(false);
   };
 
-
   const handleLogout = () => {
     setToken(null);
     setAuthorInfo(null);
@@ -74,19 +64,27 @@ const NavBar = () => {
     navigate("/");
   };
 
+  const handleNavigate = (path) => {
+    navigate(path);
+    setExpanded(false); // Close the navbar after navigation
+  };
 
   return (
-    <Navbar expand="lg" className="blog-navbar navbar-expand-lg" fixed="top">
+    <Navbar
+      expand="lg"
+      className="blog-navbar navbar-expand-lg"
+      fixed="top"
+      expanded={expanded}
+    >
       <Container className="justify-content-between">
         <Navbar.Brand as={Link} to="/">
           <img className="blog-navbar-brand" alt="logo" src={logo} />
         </Navbar.Brand>
 
-
         <Modal
           size="lg"
           show={showReg}
-          onHide={!loading ? handleCloseReg : () => { }}
+          onHide={!loading ? handleCloseReg : () => {}}
           centered
         >
           <Modal.Header closeButton>
@@ -182,7 +180,6 @@ const NavBar = () => {
               Close
             </Button>
 
-
             <Button
               variant="primary"
               onClick={handleRegister}
@@ -202,50 +199,44 @@ const NavBar = () => {
           </Modal.Footer>
         </Modal>
 
-
         {authorInfo && token ? (
           <>
-            <Navbar.Toggle data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" />
+            <Navbar.Toggle
+              onClick={() => setExpanded(expanded ? false : true)}
+            />
             <Navbar.Collapse id="navbarSupportedContent">
-
               <Nav className="me-auto">
-                <Nav.Link as={Link} to="/authors" style={{ textDecoration: "none" }}>
+                <Nav.Link
+                  as={Link}
+                  to="/authors"
+                  onClick={() => handleNavigate("/authors")}
+                  style={{ textDecoration: "none" }}
+                >
                   Authors
                 </Nav.Link>
                 <Nav.Link
-                  onClick={() => {
-                    navigate("/profile");
-                  }}
+                  onClick={() => handleNavigate("/profile")}
                 >
                   Profile
                 </Nav.Link>
-                <Nav.Link onClick={handleLogout}>
-                  Logout
-                </Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                 <Nav.Link>
-
-
                   <Button
                     as={Link}
                     to="/new"
                     className="blog-navbar-add-button"
                     variant="outline-dark"
+                    onClick={() => handleNavigate("/new")}
                   >
                     <FiPlus size={25} />
                     New Blog
                   </Button>
                 </Nav.Link>
-
-
               </Nav>
             </Navbar.Collapse>
           </>
         ) : (
-          <Button
-            className="ms-3"
-            variant="secondary"
-            onClick={handleShowReg}
-          >
+          <Button className="ms-3" variant="secondary" onClick={handleShowReg}>
             Register
           </Button>
         )}
@@ -254,9 +245,4 @@ const NavBar = () => {
   );
 };
 
-
 export default NavBar;
-
-
-
-
