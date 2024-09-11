@@ -205,8 +205,8 @@ const NavBar = () => {
 
         {authorInfo && token ? (
           <>
-            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-            <Navbar.Collapse id="responsive-navbar-nav">
+             <Navbar.Toggle aria-controls="navbarSupportedContent" />
+             <Navbar.Collapse id="navbarSupportedContent">
 
 
               <Nav className="me-auto">
